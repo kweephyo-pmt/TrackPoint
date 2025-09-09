@@ -156,8 +156,6 @@ build/Release
 tmp/
 temp/
 
-# Face recognition models (if not needed in repo)
-# public/models/
 
 # Backup files
 *.bak
