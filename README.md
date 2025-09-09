@@ -1,7 +1,8 @@
-# AttendTrack - Professional Attendance Tracking System
+# TrackPoint - Professional Attendance Tracking System
 
 A comprehensive, modern attendance tracking application built with React, TypeScript, and Supabase. Features advanced facial recognition, location-based restrictions, real-time analytics, and a complete admin management system.
 
+![TrackPoint](public/TrackPoint.png)
 ## 🌐 Live Demo
 
 **[🚀 Try TrackPoint Live](https://trackpoint-attendance.vercel.app/)**
