@@ -201,17 +201,17 @@ const Profile: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50/30 p-4 sm:p-6 lg:p-8">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
-        <div className="relative overflow-hidden bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-xl border border-gray-200/50 p-4 sm:p-6 lg:p-8">
+        <div className="relative overflow-hidden bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-xl border border-gray-200/50 p-3 sm:p-4 lg:p-6">
           <div className="absolute inset-0 bg-gradient-to-r from-gray-50/50 via-white/30 to-gray-50/50"></div>
-          <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0">
+          <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-3 sm:space-y-0">
             <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent flex items-center space-x-2 leading-tight">
+              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent flex items-center space-x-2 leading-tight">
                 <span>Profile</span>
-                <User className="w-6 h-6 sm:w-7 sm:h-7 text-gray-500" />
+                <User className="w-5 h-5 sm:w-6 sm:h-6 text-gray-500" />
               </h1>
-              <p className="text-gray-600 font-medium flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 mt-2 text-sm sm:text-base">
+              <p className="text-gray-600 font-medium flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 mt-1 text-xs sm:text-sm">
                 <span className="flex items-center space-x-2">
-                  <span className="w-2 h-2 bg-gray-500 rounded-full animate-pulse"></span>
+                  <span className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-pulse"></span>
                   <span>Manage your personal information</span>
                 </span>
               </p>
@@ -223,11 +223,11 @@ const Profile: React.FC = () => {
         <div className="relative">
           <div className="bg-white/95 backdrop-blur-xl rounded-3xl border border-gray-200/50 shadow-2xl overflow-hidden">
             {/* Profile Header */}
-            <div className="relative p-8 bg-gradient-to-r from-blue-50/80 via-indigo-50/80 to-blue-50/80">
-              <div className="flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-8">
+            <div className="relative p-4 sm:p-6 bg-gradient-to-r from-blue-50/80 via-indigo-50/80 to-blue-50/80">
+              <div className="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-6">
                 {/* Avatar Section */}
                 <div className="relative group">
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 p-1 shadow-2xl">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 p-1 shadow-xl">
                     <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
                       {profile?.avatar_url ? (
                         <img 
@@ -236,19 +236,19 @@ const Profile: React.FC = () => {
                           className="w-full h-full object-cover rounded-full"
                         />
                       ) : (
-                        <User className="w-16 h-16 text-gray-400" />
+                        <User className="w-12 h-12 sm:w-14 sm:h-14 text-gray-400" />
                       )}
                     </div>
                   </div>
                   <button 
                     onClick={triggerPhotoUpload}
                     disabled={photoUploading}
-                    className="absolute bottom-2 right-2 w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="absolute bottom-1 right-1 w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {photoUploading ? (
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     ) : (
-                      <Camera className="w-5 h-5 text-white" />
+                      <Camera className="w-4 h-4 text-white" />
                     )}
                   </button>
                   <input
@@ -289,13 +289,13 @@ const Profile: React.FC = () => {
                       </div>
                     ) : (
                       <>
-                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
                           {profile?.full_name || 'Loading...'}
                         </h2>
-                        <p className="text-blue-700 text-lg font-medium">
+                        <p className="text-blue-700 text-base sm:text-lg font-medium">
                           {profile?.position || 'Position'}
                         </p>
-                        <p className="text-gray-600 text-sm">
+                        <p className="text-gray-600 text-xs sm:text-sm">
                           {profile?.department || 'Department'}
                         </p>
                       </>
@@ -353,81 +353,81 @@ const Profile: React.FC = () => {
             </div>
 
             {/* Profile Details Grid */}
-            <div className="p-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="p-4 sm:p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {/* Contact Info */}
-                <div className="space-y-4">
-                  <h3 className="text-gray-900 font-semibold text-lg mb-4 flex items-center">
-                    <Mail className="w-5 h-5 mr-2 text-blue-600" />
+                <div className="space-y-3">
+                  <h3 className="text-gray-900 font-semibold text-base sm:text-lg mb-3 flex items-center">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-600" />
                     Contact
                   </h3>
-                  <div className="space-y-3">
-                    <div className="p-4 bg-gray-50/80 backdrop-blur-xl rounded-2xl border border-gray-200/50">
-                      <p className="text-gray-600 text-sm">Email</p>
-                      <p className="text-gray-900 font-medium">{profile?.email || 'Not provided'}</p>
+                  <div className="space-y-2">
+                    <div className="p-3 bg-gray-50/80 backdrop-blur-xl rounded-xl border border-gray-200/50">
+                      <p className="text-gray-600 text-xs sm:text-sm">Email</p>
+                      <p className="text-gray-900 font-medium text-sm">{profile?.email || 'Not provided'}</p>
                     </div>
-                    <div className="p-4 bg-gray-50/80 backdrop-blur-xl rounded-2xl border border-gray-200/50">
-                      <p className="text-gray-600 text-sm">Phone</p>
+                    <div className="p-3 bg-gray-50/80 backdrop-blur-xl rounded-xl border border-gray-200/50">
+                      <p className="text-gray-600 text-xs sm:text-sm">Phone</p>
                       {isEditing ? (
                         <input
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
-                          className="text-gray-900 font-medium bg-white border border-gray-300 rounded-lg px-3 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="text-gray-900 font-medium text-sm bg-white border border-gray-300 rounded-lg px-3 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           placeholder="Phone number"
                         />
                       ) : (
-                        <p className="text-gray-900 font-medium">{profile?.phone || 'Not provided'}</p>
+                        <p className="text-gray-900 font-medium text-sm">{profile?.phone || 'Not provided'}</p>
                       )}
                     </div>
                   </div>
                 </div>
 
                 {/* Work Info */}
-                <div className="space-y-4">
-                  <h3 className="text-gray-900 font-semibold text-lg mb-4 flex items-center">
-                    <Building className="w-5 h-5 mr-2 text-blue-600" />
+                <div className="space-y-3">
+                  <h3 className="text-gray-900 font-semibold text-base sm:text-lg mb-3 flex items-center">
+                    <Building className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-600" />
                     Work
                   </h3>
-                  <div className="space-y-3">
-                    <div className="p-4 bg-gray-50/80 backdrop-blur-xl rounded-2xl border border-gray-200/50">
-                      <p className="text-gray-600 text-sm">Department</p>
-                      <p className="text-gray-900 font-medium">{profile?.department || 'Not provided'}</p>
+                  <div className="space-y-2">
+                    <div className="p-3 bg-gray-50/80 backdrop-blur-xl rounded-xl border border-gray-200/50">
+                      <p className="text-gray-600 text-xs sm:text-sm">Department</p>
+                      <p className="text-gray-900 font-medium text-sm">{profile?.department || 'Not provided'}</p>
                     </div>
-                    <div className="p-4 bg-gray-50/80 backdrop-blur-xl rounded-2xl border border-gray-200/50">
-                      <p className="text-gray-600 text-sm">Position</p>
-                      <p className="text-gray-900 font-medium">{profile?.position || 'Not provided'}</p>
+                    <div className="p-3 bg-gray-50/80 backdrop-blur-xl rounded-xl border border-gray-200/50">
+                      <p className="text-gray-600 text-xs sm:text-sm">Position</p>
+                      <p className="text-gray-900 font-medium text-sm">{profile?.position || 'Not provided'}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Security & Settings */}
-                <div className="space-y-4">
-                  <h3 className="text-gray-900 font-semibold text-lg mb-4 flex items-center">
-                    <Shield className="w-5 h-5 mr-2 text-blue-600" />
+                <div className="space-y-3">
+                  <h3 className="text-gray-900 font-semibold text-base sm:text-lg mb-3 flex items-center">
+                    <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-600" />
                     Security
                   </h3>
-                  <div className="space-y-3">
-                    <div className="p-4 bg-gray-50/80 backdrop-blur-xl rounded-2xl border border-gray-200/50">
+                  <div className="space-y-2">
+                    <div className="p-3 bg-gray-50/80 backdrop-blur-xl rounded-xl border border-gray-200/50">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-gray-600 text-sm">Face Recognition</p>
-                          <p className="text-gray-900 font-medium">
+                          <p className="text-gray-600 text-xs sm:text-sm">Face Recognition</p>
+                          <p className="text-gray-900 font-medium text-sm">
                             {profile?.face_encoding ? 'Enabled' : 'Disabled'}
                           </p>
                         </div>
-                        <div className={`w-3 h-3 rounded-full ${profile?.face_encoding ? 'bg-emerald-500' : 'bg-gray-400'}`}></div>
+                        <div className={`w-2.5 h-2.5 rounded-full ${profile?.face_encoding ? 'bg-emerald-500' : 'bg-gray-400'}`}></div>
                       </div>
                     </div>
-                    <div className="p-4 bg-gray-50/80 backdrop-blur-xl rounded-2xl border border-gray-200/50">
+                    <div className="p-3 bg-gray-50/80 backdrop-blur-xl rounded-xl border border-gray-200/50">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-gray-600 text-sm">Member Since</p>
-                          <p className="text-gray-900 font-medium">
+                          <p className="text-gray-600 text-xs sm:text-sm">Member Since</p>
+                          <p className="text-gray-900 font-medium text-sm">
                             {profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : 'Loading...'}
                           </p>
                         </div>
-                        <Calendar className="w-5 h-5 text-blue-600" />
+                        <Calendar className="w-4 h-4 text-blue-600" />
                       </div>
                     </div>
                   </div>

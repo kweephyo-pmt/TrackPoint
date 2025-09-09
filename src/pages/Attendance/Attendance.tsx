@@ -430,31 +430,31 @@ const Attendance: React.FC = () => {
   const withinRadius = isWithinAllowedRadius();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50/30 p-4 sm:p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50/30 p-3 sm:p-4 lg:p-6">
+      <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Header */}
-        <div className="relative overflow-hidden bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-xl border border-gray-200/50 p-4 sm:p-6 lg:p-8">
+        <div className="relative overflow-hidden bg-white/60 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-lg border border-gray-200/50 p-3 sm:p-4 lg:p-5">
           <div className="absolute inset-0 bg-gradient-to-r from-gray-50/50 via-white/30 to-gray-50/50"></div>
-          <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0">
+          <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-3 sm:space-y-0">
             <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent flex items-center space-x-2 leading-tight">
+              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent flex items-center space-x-2 leading-tight">
                 <span>Attendance</span>
-                <Clipboard className="w-6 h-6 sm:w-7 sm:h-7 text-gray-500" />
+                <Clipboard className="w-5 h-5 sm:w-6 sm:h-6 text-gray-500" />
               </h1>
-              <p className="text-gray-600 font-medium flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 mt-2 text-sm sm:text-base">
-                <span className="flex items-center space-x-2">
-                  <span className="w-2 h-2 bg-gray-500 rounded-full animate-pulse"></span>
+              <p className="text-gray-600 font-medium flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 mt-1 text-xs sm:text-sm">
+                <span className="flex items-center space-x-1">
+                  <span className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-pulse"></span>
                   <span>Manage your daily attendance and sessions</span>
                 </span>
               </p>
             </div>
             {(currentLocation && locations.length > 0) && (
-              <div className="flex items-center space-x-2 sm:space-x-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl backdrop-blur-sm border border-gray-200/50 shadow-lg w-full sm:w-auto justify-center sm:justify-start">
-                <MapPin className={`w-4 h-4 sm:w-5 sm:h-5 ${withinRadius ? 'text-emerald-600' : 'text-red-600'}`} />
-                <span className={`text-xs sm:text-sm font-semibold ${withinRadius ? 'text-emerald-600' : 'text-red-600'} text-center sm:text-left`}>
+              <div className="flex items-center space-x-2 px-3 py-2 rounded-lg backdrop-blur-sm border border-gray-200/50 shadow-md w-full sm:w-auto justify-center sm:justify-start">
+                <MapPin className={`w-3 h-3 sm:w-4 sm:h-4 ${withinRadius ? 'text-emerald-600' : 'text-red-600'}`} />
+                <span className={`text-xs font-semibold ${withinRadius ? 'text-emerald-600' : 'text-red-600'} text-center sm:text-left`}>
                   {withinRadius ? 'Within allowed area' : 'Outside allowed area'}
                 </span>
-                <div className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full animate-pulse ${withinRadius ? 'bg-emerald-500' : 'bg-red-500'}`}></div>
+                <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full animate-pulse ${withinRadius ? 'bg-emerald-500' : 'bg-red-500'}`}></div>
               </div>
             )}
           </div>
@@ -462,17 +462,17 @@ const Attendance: React.FC = () => {
 
         {/* Location Status */}
         {hasAttemptedLocation && !currentLocation && !skipLocationCheck && (
-          <div className="bg-gradient-to-r from-amber-50/80 to-orange-50/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-xl border border-amber-200/50 overflow-hidden">
-            <div className="p-4 sm:p-6 lg:p-8">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg sm:mr-4">
-                  <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          <div className="bg-gradient-to-r from-amber-50/80 to-orange-50/80 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-lg border border-amber-200/50 overflow-hidden">
+            <div className="p-3 sm:p-4 lg:p-5">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-md sm:mr-3">
+                  <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <div className="flex-1">
-                  <p className="font-bold text-amber-900 text-base sm:text-lg">
+                  <p className="font-bold text-amber-900 text-sm sm:text-base">
                     {locationLoading ? 'Getting your location...' : (locationError || 'Location access required')}
                   </p>
-                  <p className="text-xs sm:text-sm text-amber-700 font-medium mt-1">
+                  <p className="text-xs text-amber-700 font-medium mt-1">
                     {locationLoading 
                       ? 'Please wait while we determine your location.'
                       : (locationError 
@@ -481,10 +481,10 @@ const Attendance: React.FC = () => {
                     }
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
                   <button
                     onClick={handleRetryLocation}
-                    className="px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-semibold rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 text-sm sm:text-base"
+                    className="px-3 py-2 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 text-xs"
                     disabled={locationRetries >= 3 || locationLoading}
                   >
                     {locationLoading ? 'Getting Location...' : (locationRetries > 0 ? `Retry (${locationRetries}/3)` : 'Enable Location')}
@@ -492,7 +492,7 @@ const Attendance: React.FC = () => {
                   {locationError && (
                     <button
                       onClick={() => setSkipLocationCheck(true)}
-                      className="px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-semibold rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm sm:text-base"
+                      className="px-3 py-2 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 text-xs"
                     >
                       Continue Without Location
                     </button>
@@ -503,30 +503,30 @@ const Attendance: React.FC = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Check In/Out Section */}
-          <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-200/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-gray-800 via-gray-800 to-gray-900 p-6">
+          <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-gray-200/50 overflow-hidden">
+            <div className="bg-gradient-to-r from-gray-800 via-gray-800 to-gray-900 p-5">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-2xl sm:rounded-3xl flex items-center justify-center backdrop-blur-sm shadow-lg">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-xl sm:rounded-2xl flex items-center justify-center backdrop-blur-sm shadow-lg">
                   <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-white flex items-center space-x-2">
                     <span>Quick Actions</span>
                   </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm font-medium">Check in and out of your sessions</p>
+                  <p className="text-slate-300 text-sm font-medium">Check in and out of your sessions</p>
                 </div>
               </div>
             </div>
-            <div className="p-6 sm:p-8">
+            <div className="p-5 sm:p-6">
             
             {activeSessionRecord ? (
               <div className="space-y-4">
-                <div className="p-6 bg-gradient-to-r from-emerald-50/80 to-green-50/80 border border-emerald-200/50 rounded-3xl backdrop-blur-sm">
+                <div className="p-5 bg-gradient-to-r from-emerald-50/80 to-green-50/80 border border-emerald-200/50 rounded-2xl backdrop-blur-sm">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <p className="font-bold text-emerald-900 text-lg flex items-center space-x-2">
+                      <p className="font-bold text-emerald-900 text-base flex items-center space-x-2">
                         <Clock className="w-5 h-5 text-emerald-600" />
                         <span>Currently Active</span>
                       </p>
@@ -535,10 +535,10 @@ const Attendance: React.FC = () => {
                         {activeSessionRecord.check_in_time ? format(new Date(activeSessionRecord.check_in_time), 'h:mm a') : ''}
                       </p>
                       <div className="mt-4 space-y-3">
-                        <div className="p-4 bg-gradient-to-r from-emerald-100/80 to-green-100/80 rounded-2xl backdrop-blur-sm">
+                        <div className="p-4 bg-gradient-to-r from-emerald-100/80 to-green-100/80 rounded-xl backdrop-blur-sm">
                           <div className="flex items-center justify-between">
                             <span className="text-sm font-bold text-emerald-800">Elapsed Time:</span>
-                            <span className="text-xl font-mono font-bold text-emerald-900 bg-white/50 px-3 py-1 rounded-xl">{elapsedTime}</span>
+                            <span className="text-xl font-mono font-bold text-emerald-900 bg-white/50 px-3 py-1 rounded-lg">{elapsedTime}</span>
                           </div>
                         </div>
                       </div>
@@ -554,7 +554,7 @@ const Attendance: React.FC = () => {
                 <button
                   onClick={() => handleCheckOut(activeSessionRecord.id)}
                   disabled={actionLoading || !currentLocation || !withinRadius}
-                  className="w-full px-6 py-4 bg-gradient-to-r from-red-600 to-pink-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+                  className="w-full px-5 py-4 bg-gradient-to-r from-red-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-base"
                 >
                   {actionLoading ? (
                     <div className="flex items-center justify-center">
@@ -563,21 +563,21 @@ const Attendance: React.FC = () => {
                     </div>
                   ) : (
                     <div className="flex items-center justify-center">
-                      <Square className="w-6 h-6 mr-3" />
+                      <Square className="w-5 h-5 mr-3" />
                       Check Out
                     </div>
                   )}
                 </button>
               </div>
             ) : (
-              <div className="space-y-4 pt-6">
+              <div className="space-y-4 pt-5">
                 {/* Session Selection */}
                 <div>
-                  <label className="label">Select Session</label>
+                  <label className="label text-sm">Select Session</label>
                   <select
                     value={selectedSession}
                     onChange={(e) => setSelectedSession(e.target.value)}
-                    className="pl-4 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-500/20 focus:border-gray-400 w-full text-sm transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm bg-white/80"
+                    className="pl-4 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-500/20 focus:border-gray-400 w-full text-sm transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm bg-white/80"
                   >
                     {sessionTypes.map((session) => (
                       <option key={session.id} value={session.id}>
@@ -588,9 +588,9 @@ const Attendance: React.FC = () => {
                 </div>
 
                 {/* Facial Recognition Info */}
-                <div className="p-4 bg-gradient-to-r from-gray-50/80 to-gray-100/80 border border-gray-200/50 rounded-2xl backdrop-blur-sm">
+                <div className="p-4 bg-gradient-to-r from-gray-50/80 to-gray-100/80 border border-gray-200/50 rounded-xl backdrop-blur-sm">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg flex items-center justify-center shadow-lg">
                       <Camera className="w-5 h-5 text-white" />
                     </div>
                     <div>
@@ -604,7 +604,7 @@ const Attendance: React.FC = () => {
                 <button
                   onClick={() => setShowFacialRecognition(true)}
                   disabled={actionLoading || !currentLocation || !withinRadius || !selectedSession}
-                  className="w-full px-6 py-4 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+                  className="w-full px-5 py-4 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-base"
                 >
                   {actionLoading ? (
                     <div className="flex items-center justify-center">
@@ -613,7 +613,7 @@ const Attendance: React.FC = () => {
                     </div>
                   ) : (
                     <div className="flex items-center justify-center">
-                      <Camera className="w-6 h-6 mr-3" />
+                      <Camera className="w-5 h-5 mr-3" />
                       Start Facial Recognition
                     </div>
                   )}
@@ -624,21 +624,21 @@ const Attendance: React.FC = () => {
           </div>
 
           {/* Today's Sessions */}
-          <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-200/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-gray-800 via-gray-800 to-gray-900 p-6">
+          <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-gray-200/50 overflow-hidden">
+            <div className="bg-gradient-to-r from-gray-800 via-gray-800 to-gray-900 p-5">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-2xl sm:rounded-3xl flex items-center justify-center backdrop-blur-sm shadow-lg">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-xl sm:rounded-2xl flex items-center justify-center backdrop-blur-sm shadow-lg">
                   <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-white flex items-center space-x-2">
                     <span>Today's Sessions</span>
                   </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm font-medium">Track your daily session progress</p>
+                  <p className="text-slate-300 text-sm font-medium">Track your daily session progress</p>
                 </div>
               </div>
             </div>
-            <div className="p-6 sm:p-8">
+            <div className="p-5 sm:p-6">
             <div className="space-y-3">
               {sessionTypes.map((session) => {
                 const status = getSessionStatus(session.id);
@@ -647,23 +647,23 @@ const Attendance: React.FC = () => {
                 const latestRecord = sessionRecords[sessionRecords.length - 1];
                 
                 return (
-                  <div key={session.id} className="flex items-center justify-between p-5 bg-gradient-to-r from-white/60 to-gray-50/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 shadow-md hover:shadow-lg transition-all duration-300">
+                  <div key={session.id} className="flex items-center justify-between p-4 bg-gradient-to-r from-white/60 to-gray-50/60 backdrop-blur-sm rounded-xl border border-gray-200/50 shadow-md hover:shadow-lg transition-all duration-300">
                     <div className="flex items-center space-x-4">
-                      <div className={`p-3 rounded-2xl shadow-lg ${
+                      <div className={`p-3 rounded-xl shadow-lg ${
                         status === 'completed' ? 'bg-gradient-to-br from-emerald-500 to-green-500' :
                         status === 'active' ? 'bg-gradient-to-br from-amber-500 to-orange-500' :
                         'bg-gradient-to-br from-gray-400 to-slate-500'
                       }`}>
                         {status === 'completed' ? (
-                          <CheckCircle className="w-6 h-6 text-white" />
+                          <CheckCircle className="w-5 h-5 text-white" />
                         ) : status === 'active' ? (
-                          <Clock className="w-6 h-6 text-white animate-pulse" />
+                          <Clock className="w-5 h-5 text-white animate-pulse" />
                         ) : (
-                          <Circle className="w-6 h-6 text-white" />
+                          <Circle className="w-5 h-5 text-white" />
                         )}
                       </div>
                       <div>
-                        <p className="font-bold text-gray-900 text-lg">{session.name}</p>
+                        <p className="font-bold text-gray-900 text-base">{session.name}</p>
                         <p className="text-sm text-gray-600 font-medium">
                           {session.start_time} - {session.end_time}
                         </p>
@@ -672,7 +672,7 @@ const Attendance: React.FC = () => {
                     <div className="text-right flex-shrink-0">
                       {sessionRecords.length > 0 ? (
                         <div>
-                          <p className="text-sm font-bold text-gray-900 bg-white/50 px-3 py-1 rounded-xl">
+                          <p className="text-sm font-bold text-gray-900 bg-white/50 px-3 py-1 rounded-lg">
                             {status === 'active' ? (
                               elapsedTime.split(':').map((part, index) => {
                                 if (index === 0) return `${parseInt(part)}h`;
@@ -688,7 +688,7 @@ const Attendance: React.FC = () => {
                           </p>
                         </div>
                       ) : (
-                        <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-gray-500 to-gray-600 text-white text-xs font-bold rounded-full shadow-lg whitespace-nowrap">Not Started</span>
+                        <span className="px-3 py-1 bg-gradient-to-r from-gray-500 to-gray-600 text-white text-xs font-bold rounded-full shadow-lg whitespace-nowrap">Not Started</span>
                       )}
                     </div>
                   </div>

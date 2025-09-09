@@ -321,17 +321,17 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Welcome Header */}
-        <div className="relative overflow-hidden bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-xl border border-gray-200/50 p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8">
+        <div className="relative overflow-hidden bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-xl border border-gray-200/50 p-3 sm:p-4 lg:p-6 mb-4 sm:mb-6">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 via-white/30 to-indigo-50/50"></div>
-          <div className="relative text-center space-y-3 sm:space-y-4">
-            <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-700 bg-clip-text text-transparent leading-tight">
+          <div className="relative text-center space-y-2 sm:space-y-3">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-700 bg-clip-text text-transparent leading-tight">
               Welcome back, {profile?.full_name?.split(' ')[0] || 'User'}! ✨
             </h1>
-            <p className="text-xs sm:text-sm lg:text-lg text-gray-600 font-semibold flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+            <p className="text-xs sm:text-sm text-gray-600 font-semibold flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
               <span className="flex items-center space-x-2">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
                 <span className="text-center">{format(currentTime, 'EEEE, MMMM do, yyyy')}</span>
-                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></span>
               </span>
               <span className="text-center">{format(currentTime, 'h:mm a')}</span>
             </p>
@@ -340,19 +340,19 @@ const Dashboard: React.FC = () => {
             {(() => {
               const activeSession = getActiveSession();
               return activeSession ? (
-                <div className="mt-4 p-3 sm:p-4 bg-gradient-to-r from-emerald-50/80 to-green-50/80 border border-emerald-200/50 rounded-xl sm:rounded-2xl backdrop-blur-sm">
-                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
+                <div className="mt-3 p-2 sm:p-3 bg-gradient-to-r from-emerald-50/80 to-green-50/80 border border-emerald-200/50 rounded-lg sm:rounded-xl backdrop-blur-sm">
+                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-3">
                     <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
-                      <span className="text-emerald-800 font-bold text-xs sm:text-sm">Currently Active:</span>
-                      <span className="text-emerald-900 font-bold text-sm sm:text-lg">
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                      <span className="text-emerald-800 font-bold text-xs">Currently Active:</span>
+                      <span className="text-emerald-900 font-bold text-sm">
                         {activeSession.session_types?.name || 'Unknown Session'}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Clock className="w-4 h-4 text-emerald-600" />
-                      <span className="text-emerald-800 font-bold text-xs sm:text-sm">Elapsed:</span>
-                      <span className="text-emerald-900 font-mono font-bold text-lg sm:text-xl bg-white/50 px-2 sm:px-3 py-1 rounded-lg sm:rounded-xl">
+                      <Clock className="w-3 h-3 text-emerald-600" />
+                      <span className="text-emerald-800 font-bold text-xs">Elapsed:</span>
+                      <span className="text-emerald-900 font-mono font-bold text-sm bg-white/50 px-2 py-1 rounded-lg">
                         {elapsedTime}
                       </span>
                     </div>
@@ -366,22 +366,22 @@ const Dashboard: React.FC = () => {
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {/* Today Card */}
-          <div className="group relative overflow-hidden bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 hover:border-blue-300/50">
+          <div className="group relative overflow-hidden bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200/50 hover:border-blue-300/50">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50/70 to-cyan-50/70"></div>
-            <div className="relative p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-3xl flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Clock className="w-7 h-7 text-white" />
+            <div className="relative p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                  <Clock className="w-5 h-5 text-white" />
                 </div>
-                <div className="text-blue-500 opacity-20 group-hover:opacity-40 transition-all duration-300 group-hover:rotate-12">
-                  <Activity className="w-8 h-8" />
+                <div className="text-blue-500 opacity-20 group-hover:opacity-30 transition-all duration-300">
+                  <Activity className="w-6 h-6" />
                 </div>
               </div>
-              <div className="space-y-2">
-                <p className="text-sm font-bold text-gray-600 uppercase tracking-wider">Today</p>
-                <p className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent">{Math.floor(stats.todayHours)}h {Math.round((stats.todayHours % 1) * 60)}m</p>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2.5 h-2.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-pulse"></div>
+              <div className="space-y-1">
+                <p className="text-xs font-bold text-gray-600 uppercase tracking-wider">Today</p>
+                <p className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent">{Math.floor(stats.todayHours)}h {Math.round((stats.todayHours % 1) * 60)}m</p>
+                <div className="flex items-center space-x-1">
+                  <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-pulse"></div>
                   <p className="text-xs text-gray-500 font-semibold">Hours worked</p>
                 </div>
               </div>
@@ -389,22 +389,22 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* This Week Card */}
-          <div className="group relative overflow-hidden bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 hover:border-indigo-300/50">
+          <div className="group relative overflow-hidden bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200/50 hover:border-indigo-300/50">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/70 to-purple-50/70"></div>
-            <div className="relative p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Calendar className="w-7 h-7 text-white" />
+            <div className="relative p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                  <Calendar className="w-5 h-5 text-white" />
                 </div>
-                <div className="text-indigo-500 opacity-20 group-hover:opacity-40 transition-all duration-300 group-hover:rotate-12">
+                <div className="text-indigo-500 opacity-20 group-hover:opacity-30 transition-all duration-300">
                   <TrendingUp className="w-8 h-8" />
                 </div>
               </div>
-              <div className="space-y-2">
-                <p className="text-sm font-bold text-gray-600 uppercase tracking-wider">This Week</p>
-                <p className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-indigo-800 bg-clip-text text-transparent">{Math.floor(stats.weekHours)}h {Math.round((stats.weekHours % 1) * 60)}m</p>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2.5 h-2.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-pulse"></div>
+              <div className="space-y-1">
+                <p className="text-xs font-bold text-gray-600 uppercase tracking-wider">This Week</p>
+                <p className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-indigo-800 bg-clip-text text-transparent">{Math.floor(stats.weekHours)}h {Math.round((stats.weekHours % 1) * 60)}m</p>
+                <div className="flex items-center space-x-1">
+                  <div className="w-2 h-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-pulse"></div>
                   <p className="text-xs text-gray-500 font-semibold">Weekly progress</p>
                 </div>
               </div>
@@ -412,22 +412,22 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* This Month Card */}
-          <div className="group relative overflow-hidden bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 hover:border-emerald-300/50">
+          <div className="group relative overflow-hidden bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200/50 hover:border-emerald-300/50">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/70 to-teal-50/70"></div>
-            <div className="relative p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <TrendingUp className="w-7 h-7 text-white" />
+            <div className="relative p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                  <TrendingUp className="w-5 h-5 text-white" />
                 </div>
-                <div className="text-emerald-500 opacity-20 group-hover:opacity-40 transition-all duration-300 group-hover:rotate-12">
-                  <Target className="w-8 h-8" />
+                <div className="text-emerald-500 opacity-20 group-hover:opacity-30 transition-all duration-300">
+                  <Target className="w-6 h-6" />
                 </div>
               </div>
-              <div className="space-y-2">
-                <p className="text-sm font-bold text-gray-600 uppercase tracking-wider">This Month</p>
-                <p className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-emerald-800 bg-clip-text text-transparent">{Math.floor(stats.monthHours)}h {Math.round((stats.monthHours % 1) * 60)}m</p>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2.5 h-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full animate-pulse"></div>
+              <div className="space-y-1">
+                <p className="text-xs font-bold text-gray-600 uppercase tracking-wider">This Month</p>
+                <p className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-emerald-800 bg-clip-text text-transparent">{Math.floor(stats.monthHours)}h {Math.round((stats.monthHours % 1) * 60)}m</p>
+                <div className="flex items-center space-x-1">
+                  <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full animate-pulse"></div>
                   <p className="text-xs text-gray-500 font-semibold">Monthly total</p>
                 </div>
               </div>
@@ -435,22 +435,22 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Attendance Rate Card */}
-          <div className="group relative overflow-hidden bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 hover:border-amber-300/50">
+          <div className="group relative overflow-hidden bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200/50 hover:border-amber-300/50">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-50/70 to-orange-50/70"></div>
-            <div className="relative p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-500 rounded-3xl flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Award className="w-7 h-7 text-white" />
+            <div className="relative p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                  <Award className="w-5 h-5 text-white" />
                 </div>
-                <div className="text-amber-500 opacity-20 group-hover:opacity-40 transition-all duration-300 group-hover:rotate-12">
-                  <Users className="w-8 h-8" />
+                <div className="text-amber-500 opacity-20 group-hover:opacity-30 transition-all duration-300">
+                  <Users className="w-6 h-6" />
                 </div>
               </div>
-              <div className="space-y-2">
-                <p className="text-sm font-bold text-gray-600 uppercase tracking-wider">Attendance Rate</p>
-                <p className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-amber-800 bg-clip-text text-transparent">{stats.attendanceRate}%</p>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2.5 h-2.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full animate-pulse"></div>
+              <div className="space-y-1">
+                <p className="text-xs font-bold text-gray-600 uppercase tracking-wider">Attendance Rate</p>
+                <p className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-amber-800 bg-clip-text text-transparent">{stats.attendanceRate}%</p>
+                <div className="flex items-center space-x-1">
+                  <div className="w-2 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full animate-pulse"></div>
                   <p className="text-xs text-gray-500 font-semibold">Performance metric</p>
                 </div>
               </div>

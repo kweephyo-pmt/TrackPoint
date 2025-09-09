@@ -466,17 +466,17 @@ const AdminUsers: React.FC = () => {
           <div className="block lg:hidden">
             <div className="p-4 space-y-4">
               {filteredUsers.map((user) => (
-                <div key={user.id} className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-sm border border-slate-200">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center space-x-3">
-                      <div className="h-10 w-10 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center text-white font-bold text-sm">
+                <div key={user.id} className="bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-sm border border-slate-200">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center text-white font-bold text-xs">
                         {user.full_name?.charAt(0)?.toUpperCase() || 'U'}
                       </div>
-                      <div>
-                        <div className="text-sm font-bold text-slate-900">{user.full_name}</div>
-                        <div className="text-xs text-slate-500 flex items-center space-x-1">
-                          <Mail className="h-3 w-3" />
-                          <span>{user.email}</span>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm font-bold text-slate-900 truncate">{user.full_name}</div>
+                        <div className="text-xs text-slate-500 flex items-center space-x-1 truncate">
+                          <Mail className="h-3 w-3 flex-shrink-0" />
+                          <span className="truncate">{user.email}</span>
                         </div>
                       </div>
                     </div>
@@ -497,14 +497,14 @@ const AdminUsers: React.FC = () => {
                     </button>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-3 text-xs">
+                  <div className="grid grid-cols-2 gap-2 text-xs">
                     <div>
-                      <div className="text-slate-500 mb-1">Employee ID</div>
-                      <div className="font-medium text-slate-900">{user.employee_id || '-'}</div>
+                      <div className="text-slate-500 mb-1 text-xs">Employee ID</div>
+                      <div className="font-medium text-slate-900 text-xs truncate">{user.employee_id || '-'}</div>
                     </div>
                     <div>
-                      <div className="text-slate-500 mb-1">Role</div>
-                      <span className={`inline-flex px-2 py-1 text-xs font-bold rounded-full ${
+                      <div className="text-slate-500 mb-1 text-xs">Role</div>
+                      <span className={`inline-flex px-1.5 py-0.5 text-xs font-bold rounded-full ${
                         user.role === 'admin' 
                           ? 'bg-gradient-to-r from-purple-100 to-violet-100 text-purple-800' 
                           : 'bg-gradient-to-r from-slate-100 to-gray-100 text-slate-800'
@@ -513,21 +513,21 @@ const AdminUsers: React.FC = () => {
                       </span>
                     </div>
                     <div>
-                      <div className="text-slate-500 mb-1">Department</div>
-                      <div className="font-medium text-slate-900">{user.department || '-'}</div>
+                      <div className="text-slate-500 mb-1 text-xs">Department</div>
+                      <div className="font-medium text-slate-900 text-xs truncate">{user.department || '-'}</div>
                     </div>
                     <div>
-                      <div className="text-slate-500 mb-1">Position</div>
-                      <div className="font-medium text-slate-900">{user.position || '-'}</div>
+                      <div className="text-slate-500 mb-1 text-xs">Position</div>
+                      <div className="font-medium text-slate-900 text-xs truncate">{user.position || '-'}</div>
                     </div>
                   </div>
                   
-                  <div className="flex justify-end mt-3 space-x-2">
+                  <div className="flex justify-end mt-2 space-x-1">
                     <button
                       onClick={() => handleDeleteUser(user.id)}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
+                      className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-3.5 w-3.5" />
                     </button>
                   </div>
                 </div>
