@@ -8,7 +8,6 @@ import {
   BarChart3, 
   LogOut,
   Menu,
-  X,
   Shield,
   MapPin
 } from 'lucide-react';
@@ -65,13 +64,11 @@ const AdminSidebar: React.FC = () => {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-xl shadow-lg border border-gray-200 hover:bg-gray-50 transition-all duration-200"
+        className={`lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-xl shadow-lg border border-gray-200 hover:bg-gray-50 transition-all duration-200 ${
+          isMobileMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
       >
-        {isMobileMenuOpen ? (
-          <X className="w-6 h-6 text-gray-600" />
-        ) : (
-          <Menu className="w-6 h-6 text-gray-600" />
-        )}
+        <Menu className="w-6 h-6 text-gray-600" />
       </button>
 
       {/* Mobile Overlay */}

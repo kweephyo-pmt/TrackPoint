@@ -2,6 +2,12 @@
 
 A comprehensive, modern attendance tracking application built with React, TypeScript, and Supabase. Features advanced facial recognition, location-based restrictions, real-time analytics, and a complete admin management system.
 
+## 🌐 Live Demo
+
+**[🚀 Try TrackPoint Live](https://trackpoint-attendance.vercel.app/)**
+
+Experience the full-featured attendance tracking system with facial recognition, real-time dashboards, and admin management capabilities.
+
 ## ✨ Key Highlights
 
 - 🎯 **Advanced Facial Recognition** with 65% similarity threshold for secure authentication

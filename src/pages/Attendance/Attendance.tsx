@@ -669,7 +669,7 @@ const Attendance: React.FC = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right flex-shrink-0">
                       {sessionRecords.length > 0 ? (
                         <div>
                           <p className="text-sm font-bold text-gray-900 bg-white/50 px-3 py-1 rounded-xl">
@@ -688,7 +688,7 @@ const Attendance: React.FC = () => {
                           </p>
                         </div>
                       ) : (
-                        <span className="px-3 py-1.5 bg-gradient-to-r from-gray-500 to-gray-600 text-white text-xs font-bold rounded-full shadow-lg">Not Started</span>
+                        <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-gray-500 to-gray-600 text-white text-xs font-bold rounded-full shadow-lg whitespace-nowrap">Not Started</span>
                       )}
                     </div>
                   </div>

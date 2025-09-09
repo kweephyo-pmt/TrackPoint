@@ -462,23 +462,23 @@ const Profile: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-between p-4 bg-gray-50/80 rounded-2xl border border-gray-200/50">
-                  <div>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-gray-50/80 rounded-2xl border border-gray-200/50 space-y-4 sm:space-y-0">
+                  <div className="flex-1">
                     <h4 className="font-medium text-gray-900">Manage Face Recognition</h4>
                     <p className="text-sm text-gray-600">Remove or reconfigure your facial authentication</p>
                   </div>
-                  <div className="flex space-x-3">
+                  <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 w-full sm:w-auto">
                     <button
                       onClick={() => setShowFaceSetup(true)}
                       disabled={faceSetupLoading}
-                      className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium rounded-xl border border-blue-200 transition-colors disabled:opacity-50"
+                      className="w-full sm:w-auto px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium rounded-xl border border-blue-200 transition-colors disabled:opacity-50 text-center"
                     >
                       Reconfigure
                     </button>
                     <button
                       onClick={handleRemoveFace}
                       disabled={faceSetupLoading}
-                      className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 font-medium rounded-xl border border-red-200 transition-colors disabled:opacity-50"
+                      className="w-full sm:w-auto px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 font-medium rounded-xl border border-red-200 transition-colors disabled:opacity-50 text-center"
                     >
                       {faceSetupLoading ? 'Removing...' : 'Remove'}
                     </button>

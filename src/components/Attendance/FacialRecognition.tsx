@@ -85,8 +85,8 @@ const FacialRecognition: React.FC<FacialRecognitionProps> = ({ onSuccess, onCanc
 
       const detection = detections[0];
       
-      // Check detection confidence
-      if (detection.detection.score < 0.7) {
+      // Check detection confidence (relaxed threshold)
+      if (detection.detection.score < 0.5) {
         setError('Face detection quality too low. Please ensure good lighting and clear view.');
         setFaceDetected(false);
         setVerificationStep('failed');
@@ -125,12 +125,12 @@ const FacialRecognition: React.FC<FacialRecognitionProps> = ({ onSuccess, onCanc
           
           setMatchConfidence(matchPercentage);
           
-          // Very strict threshold - only allow extremely close matches
-          const STRICT_THRESHOLD = 0.35; // Much stricter for security - requires ~65% similarity
+          // Relaxed threshold for better user experience
+          const RELAXED_THRESHOLD = 0.6; // More lenient - requires ~40% similarity
           
-          console.log(`Face verification: distance=${distance.toFixed(3)}, threshold=${STRICT_THRESHOLD}, match=${matchPercentage.toFixed(1)}%`);
+          console.log(`Face verification: distance=${distance.toFixed(3)}, threshold=${RELAXED_THRESHOLD}, match=${matchPercentage.toFixed(1)}%`);
           
-          if (distance > STRICT_THRESHOLD) {
+          if (distance > RELAXED_THRESHOLD) {
             setVerificationStep('failed');
             setError(`Access denied. Face does not match registered profile. (Match: ${matchPercentage.toFixed(1)}%)`);
             return;
