@@ -180,8 +180,8 @@ const Dashboard: React.FC = () => {
           )
         `)
         .eq('user_id', user.id)
-        .gte('check_in_time', `${today}T00:00:00`)
-        .lt('check_in_time', `${today}T23:59:59`)
+        .gte('check_in_time', `${today}T00:00:00.000Z`)
+        .lte('check_in_time', `${today}T23:59:59.999Z`)
         .order('check_in_time', { ascending: false })
         .limit(20); // Limit to recent records
 
@@ -190,6 +190,7 @@ const Dashboard: React.FC = () => {
         return;
       }
 
+      console.log('Dashboard fetched attendance records:', data); // Debug log
       setTodayAttendance(data || []);
       
     } catch (error) {

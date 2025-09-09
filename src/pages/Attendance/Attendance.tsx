@@ -161,8 +161,8 @@ const Attendance: React.FC = () => {
           )
         `)
         .eq('user_id', user.id)
-        .gte('check_in_time', `${today}T00:00:00`)
-        .lt('check_in_time', `${today}T23:59:59`)
+        .gte('check_in_time', `${today}T00:00:00.000Z`)
+        .lte('check_in_time', `${today}T23:59:59.999Z`)
         .order('check_in_time', { ascending: false })
         .limit(10); // Limit to recent records
 
@@ -171,6 +171,7 @@ const Attendance: React.FC = () => {
         return;
       }
 
+      console.log('Fetched attendance records:', data); // Debug log
       setTodayAttendance(data || []);
     } catch (error) {
       console.error('Error in fetchTodayAttendance:', error);
@@ -308,7 +309,10 @@ const Attendance: React.FC = () => {
       }
 
       toast.success('Checked in successfully!');
-      await fetchTodayAttendance();
+      // Small delay to ensure database transaction is committed
+      setTimeout(async () => {
+        await fetchTodayAttendance();
+      }, 100);
       setSelectedSession('');
       setShowFacialRecognition(false);
     } catch (error: any) {
