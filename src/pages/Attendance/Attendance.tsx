@@ -8,7 +8,7 @@ import LoadingSpinner from '../../components/UI/LoadingSpinner.tsx';
 import FacialRecognition from '../../components/Attendance/FacialRecognition.tsx';
 
 const Attendance: React.FC = () => {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const [sessionTypes, setSessionTypes] = useState<SessionType[]>([]);
   const [todayAttendance, setTodayAttendance] = useState<AttendanceRecord[]>([]);
   const [locations, setLocations] = useState<CompanyLocation[]>([]);
@@ -19,85 +19,24 @@ const Attendance: React.FC = () => {
   const [showFacialRecognition, setShowFacialRecognition] = useState(false);
   const [checkInMethod] = useState<'facial'>('facial');
   const [elapsedTime, setElapsedTime] = useState<string>('00:00:00');
-  const [locationError, setLocationError] = useState<string | null>(null);
-  const [locationRetries, setLocationRetries] = useState(0);
-  const [skipLocationCheck, setSkipLocationCheck] = useState(false);
-  const [locationLoading, setLocationLoading] = useState(false);
-  const [hasAttemptedLocation, setHasAttemptedLocation] = useState(false);
 
-  const getCurrentLocation = useCallback((retryCount = 0) => {
+  const getCurrentLocation = useCallback(() => {
     if (!navigator.geolocation) {
-      setLocationError('Geolocation is not supported by this browser.');
-      setLocationLoading(false);
-      setHasAttemptedLocation(true);
       return;
     }
 
-    if (retryCount === 0) {
-      setLocationLoading(true);
-      setHasAttemptedLocation(true);
-    }
-
     const options = {
-      enableHighAccuracy: false, // Use less accurate but more reliable location
-      timeout: 15000, // Increase timeout to 15 seconds
-      maximumAge: 300000 // Accept cached location up to 5 minutes old
+      enableHighAccuracy: false,
+      timeout: 15000,
+      maximumAge: 300000
     };
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setCurrentLocation(position);
-        setLocationError(null);
-        setLocationRetries(0);
-        setLocationLoading(false);
       },
       (error) => {
-        const maxRetries = 3;
-        const newRetryCount = retryCount + 1;
-        
-        let errorMessage = 'Unable to get your location.';
-        
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            errorMessage = 'Location access denied. Please enable location permissions.';
-            setLocationError(errorMessage);
-            setLocationLoading(false);
-            break;
-          case error.POSITION_UNAVAILABLE:
-            errorMessage = 'Location information unavailable.';
-            if (newRetryCount < maxRetries) {
-              setLocationRetries(newRetryCount);
-              setTimeout(() => getCurrentLocation(newRetryCount), 2000 * newRetryCount);
-              return;
-            }
-            setLocationError(errorMessage);
-            setLocationLoading(false);
-            break;
-          case error.TIMEOUT:
-            errorMessage = 'Location request timed out.';
-            if (newRetryCount < maxRetries) {
-              setLocationRetries(newRetryCount);
-              setTimeout(() => getCurrentLocation(newRetryCount), 1000);
-              return;
-            }
-            setLocationError(errorMessage);
-            setLocationLoading(false);
-            break;
-          default:
-            errorMessage = 'An unknown error occurred while getting location.';
-            if (newRetryCount < maxRetries) {
-              setLocationRetries(newRetryCount);
-              setTimeout(() => getCurrentLocation(newRetryCount), 2000);
-              return;
-            }
-            setLocationError(errorMessage);
-            setLocationLoading(false);
-        }
-        
-        // Only show toast on final failure
-        if (newRetryCount >= maxRetries) {
-          toast.error(`${errorMessage} You can proceed without location verification.`);
-        }
+        console.warn('Location access failed:', error.message);
       },
       options
     );
@@ -197,9 +136,6 @@ const Attendance: React.FC = () => {
     }
   };
 
-  const handleRetryLocation = () => {
-    getCurrentLocation(0);
-  };
 
   const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     const R = 6371e3; // Earth's radius in meters
@@ -386,6 +322,18 @@ const Attendance: React.FC = () => {
     return todayAttendance.find(a => !a.check_out_time);
   }, [todayAttendance]);
 
+  const hasFaceRegistered = useCallback(() => {
+    return profile?.face_encoding && profile.face_encoding.trim() !== '';
+  }, [profile]);
+
+  const handleFacialRecognitionClick = () => {
+    if (!hasFaceRegistered()) {
+      toast.error('Please register your face in your profile before using facial recognition for attendance.');
+      return;
+    }
+    setShowFacialRecognition(true);
+  };
+
   const formatElapsedTime = (startTime: string): string => {
     const start = new Date(startTime);
     const now = new Date();
@@ -460,48 +408,6 @@ const Attendance: React.FC = () => {
           </div>
         </div>
 
-        {/* Location Status */}
-        {hasAttemptedLocation && !currentLocation && !skipLocationCheck && (
-          <div className="bg-gradient-to-r from-amber-50/80 to-orange-50/80 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-lg border border-amber-200/50 overflow-hidden">
-            <div className="p-3 sm:p-4 lg:p-5">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-md sm:mr-3">
-                  <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-bold text-amber-900 text-sm sm:text-base">
-                    {locationLoading ? 'Getting your location...' : (locationError || 'Location access required')}
-                  </p>
-                  <p className="text-xs text-amber-700 font-medium mt-1">
-                    {locationLoading 
-                      ? 'Please wait while we determine your location.'
-                      : (locationError 
-                        ? 'Location services are having issues. You can proceed without location verification.'
-                        : 'Please enable location services to check in/out.')
-                    }
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
-                  <button
-                    onClick={handleRetryLocation}
-                    className="px-3 py-2 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 text-xs"
-                    disabled={locationRetries >= 3 || locationLoading}
-                  >
-                    {locationLoading ? 'Getting Location...' : (locationRetries > 0 ? `Retry (${locationRetries}/3)` : 'Enable Location')}
-                  </button>
-                  {locationError && (
-                    <button
-                      onClick={() => setSkipLocationCheck(true)}
-                      className="px-3 py-2 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 text-xs"
-                    >
-                      Continue Without Location
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Check In/Out Section */}
@@ -588,28 +494,47 @@ const Attendance: React.FC = () => {
                 </div>
 
                 {/* Facial Recognition Info */}
-                <div className="p-4 bg-gradient-to-r from-gray-50/80 to-gray-100/80 border border-gray-200/50 rounded-xl backdrop-blur-sm">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg flex items-center justify-center shadow-lg">
-                      <Camera className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-gray-900 text-sm">Facial Recognition Check-in</p>
-                      <p className="text-xs text-gray-700 font-medium">Secure attendance tracking with face verification</p>
+                {!hasFaceRegistered() ? (
+                  <div className="p-4 bg-gradient-to-r from-amber-50/80 to-orange-50/80 border border-amber-200/50 rounded-xl backdrop-blur-sm">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg flex items-center justify-center shadow-lg">
+                        <AlertCircle className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-amber-900 text-sm">Face Registration Required</p>
+                        <p className="text-xs text-amber-700 font-medium">Please register your face in your profile to use facial recognition</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="p-4 bg-gradient-to-r from-gray-50/80 to-gray-100/80 border border-gray-200/50 rounded-xl backdrop-blur-sm">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg flex items-center justify-center shadow-lg">
+                        <Camera className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-gray-900 text-sm">Facial Recognition Check-in</p>
+                        <p className="text-xs text-gray-700 font-medium">Secure attendance tracking with face verification</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Check In Button */}
                 <button
-                  onClick={() => setShowFacialRecognition(true)}
-                  disabled={actionLoading || !currentLocation || !withinRadius || !selectedSession}
+                  onClick={handleFacialRecognitionClick}
+                  disabled={actionLoading || !currentLocation || !withinRadius || !selectedSession || !hasFaceRegistered()}
                   className="w-full px-5 py-4 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-base"
                 >
                   {actionLoading ? (
                     <div className="flex items-center justify-center">
                       <LoadingSpinner size="sm" className="mr-2" />
                       Checking in...
+                    </div>
+                  ) : !hasFaceRegistered() ? (
+                    <div className="flex items-center justify-center">
+                      <AlertCircle className="w-5 h-5 mr-3" />
+                      Face Registration Required
                     </div>
                   ) : (
                     <div className="flex items-center justify-center">

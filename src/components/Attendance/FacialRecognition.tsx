@@ -125,12 +125,12 @@ const FacialRecognition: React.FC<FacialRecognitionProps> = ({ onSuccess, onCanc
           
           setMatchConfidence(matchPercentage);
           
-          // Relaxed threshold for better user experience
-          const RELAXED_THRESHOLD = 0.6; // More lenient - requires ~40% similarity
+          // Secure threshold for proper identity verification
+          const SECURE_THRESHOLD = 0.4; // Stricter - requires ~60% similarity for security
           
-          console.log(`Face verification: distance=${distance.toFixed(3)}, threshold=${RELAXED_THRESHOLD}, match=${matchPercentage.toFixed(1)}%`);
+          console.log(`Face verification: distance=${distance.toFixed(3)}, threshold=${SECURE_THRESHOLD}, match=${matchPercentage.toFixed(1)}%`);
           
-          if (distance > RELAXED_THRESHOLD) {
+          if (distance > SECURE_THRESHOLD) {
             setVerificationStep('failed');
             setError(`Access denied. Face does not match registered profile. (Match: ${matchPercentage.toFixed(1)}%)`);
             return;
@@ -172,7 +172,7 @@ const FacialRecognition: React.FC<FacialRecognitionProps> = ({ onSuccess, onCanc
       <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-200/50 p-6 sm:p-8 max-w-lg w-full mx-4">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center">
               {mode === 'checkin' ? (
                 <Shield className="w-5 h-5 text-white" />
               ) : (
@@ -288,7 +288,7 @@ const FacialRecognition: React.FC<FacialRecognitionProps> = ({ onSuccess, onCanc
                 <button
                   onClick={detectFace}
                   disabled={detecting || !modelsLoaded || verificationStep === 'success'}
-                  className="flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   {detecting ? (
                     <div className="flex items-center justify-center">

@@ -26,6 +26,7 @@ const FaceSetup: React.FC<FaceSetupProps> = ({
   const [capturedFaces, setCapturedFaces] = useState<string[]>([]);
   const [step, setStep] = useState(1);
   const [confidence, setConfidence] = useState<number>(0);
+  const [isCompleting, setIsCompleting] = useState(false);
 
   const totalSteps = 3; // Capture 3 different angles for better recognition
 
@@ -58,7 +59,7 @@ const FaceSetup: React.FC<FaceSetupProps> = ({
   };
 
   const detectAndCaptureFace = async () => {
-    if (!webcamRef.current || !canvasRef.current || !modelsLoaded || detecting || faceDetected) return;
+    if (!webcamRef.current || !canvasRef.current || !modelsLoaded || detecting) return;
 
     setDetecting(true);
     setError(null);
@@ -107,7 +108,7 @@ const FaceSetup: React.FC<FaceSetupProps> = ({
           const existingDescriptor = new Float32Array(JSON.parse(existingFaceEncoding));
           const distance = faceapi.euclideanDistance(faceDescriptor, existingDescriptor);
           
-          if (distance > 0.8) { // Threshold for same person
+          if (distance > 0.4) { // Secure threshold for same person (consistent with attendance)
             setError('Face does not match your existing profile. Please use the same person\'s face.');
             setFaceDetected(false);
             return;
@@ -131,11 +132,8 @@ const FaceSetup: React.FC<FaceSetupProps> = ({
         faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
       }
 
-      // Add to captured faces (prevent duplicates for current step)
-      setCapturedFaces(prev => {
-        const currentStepFaces = prev.filter((_, index) => index < step);
-        return [...currentStepFaces, faceEncoding];
-      });
+      // Add to captured faces
+      setCapturedFaces(prev => [...prev, faceEncoding]);
 
       // Move to next step or complete
       if (step < totalSteps) {
@@ -144,7 +142,8 @@ const FaceSetup: React.FC<FaceSetupProps> = ({
           setFaceDetected(false);
         }, 1500);
       } else {
-        // Complete setup with the best quality face encoding
+        // Complete setup with the best quality face encoding from all captures
+        setIsCompleting(true);
         setTimeout(() => {
           onSuccess(faceEncoding);
         }, 1000);
@@ -165,6 +164,7 @@ const FaceSetup: React.FC<FaceSetupProps> = ({
     setFaceDetected(false);
     setError(null);
     setConfidence(0);
+    setIsCompleting(false);
   };
 
   const getStepInstruction = () => {
@@ -199,7 +199,7 @@ const FaceSetup: React.FC<FaceSetupProps> = ({
                 {mode === 'setup' ? 'Face Setup' : 'Update Face Profile'}
               </h3>
               <p className="text-sm text-gray-600">
-                Step {step} of {totalSteps}: {getStepInstruction()}
+                Step {Math.min(step, totalSteps)} of {totalSteps}: {getStepInstruction()}
               </p>
             </div>
           </div>
@@ -290,13 +290,23 @@ const FaceSetup: React.FC<FaceSetupProps> = ({
                 
                 <button
                   onClick={detectAndCaptureFace}
-                  disabled={detecting || !modelsLoaded}
+                  disabled={detecting || !modelsLoaded || (step === totalSteps && capturedFaces.length === totalSteps) || isCompleting}
                   className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   {detecting ? (
                     <div className="flex items-center justify-center">
                       <LoadingSpinner size="sm" className="mr-2" />
                       Detecting...
+                    </div>
+                  ) : isCompleting ? (
+                    <div className="flex items-center justify-center">
+                      <LoadingSpinner size="sm" className="mr-2" />
+                      Completing...
+                    </div>
+                  ) : (step === totalSteps && capturedFaces.length === totalSteps) ? (
+                    <div className="flex items-center justify-center">
+                      <CheckCircle className="w-4 h-4 mr-2" />
+                      Completed
                     </div>
                   ) : (
                     <div className="flex items-center justify-center">
