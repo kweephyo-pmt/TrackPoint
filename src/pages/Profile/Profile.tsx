@@ -46,7 +46,6 @@ const Profile: React.FC = () => {
     setIsLoading(true);
     try {
       await updateProfile(formData);
-      toast.success('Profile updated successfully!');
       setIsEditing(false);
     } catch (error: any) {
       console.error('Error updating profile:', error);
@@ -496,26 +495,33 @@ const Profile: React.FC = () => {
                 </div>
                 
                 <div className="text-center space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                    <div className="p-4 bg-blue-50/50 rounded-2xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-center">
+                    <div className="p-3 bg-blue-50/50 rounded-2xl">
                       <div className="w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2">
                         <Camera className="w-4 h-4 text-blue-600" />
                       </div>
-                      <h4 className="font-medium text-gray-900 text-sm">1. Camera Access</h4>
-                      <p className="text-xs text-gray-600">Allow camera permission</p>
+                      <h4 className="font-medium text-gray-900 text-sm">1. Camera</h4>
+                      <p className="text-xs text-gray-600">Allow access</p>
                     </div>
-                    <div className="p-4 bg-blue-50/50 rounded-2xl">
+                    <div className="p-3 bg-blue-50/50 rounded-2xl">
                       <div className="w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2">
                         <Scan className="w-4 h-4 text-blue-600" />
                       </div>
-                      <h4 className="font-medium text-gray-900 text-sm">2. Face Scan</h4>
-                      <p className="text-xs text-gray-600">Look at the camera</p>
+                      <h4 className="font-medium text-gray-900 text-sm">2. Front View</h4>
+                      <p className="text-xs text-gray-600">Look straight</p>
                     </div>
-                    <div className="p-4 bg-blue-50/50 rounded-2xl">
+                    <div className="p-3 bg-blue-50/50 rounded-2xl">
+                      <div className="w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                        <Scan className="w-4 h-4 text-blue-600" />
+                      </div>
+                      <h4 className="font-medium text-gray-900 text-sm">3. Side Views</h4>
+                      <p className="text-xs text-gray-600">Turn left & right</p>
+                    </div>
+                    <div className="p-3 bg-blue-50/50 rounded-2xl">
                       <div className="w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2">
                         <CheckCircle className="w-4 h-4 text-blue-600" />
                       </div>
-                      <h4 className="font-medium text-gray-900 text-sm">3. Complete</h4>
+                      <h4 className="font-medium text-gray-900 text-sm">4. Complete</h4>
                       <p className="text-xs text-gray-600">Ready to use</p>
                     </div>
                   </div>
