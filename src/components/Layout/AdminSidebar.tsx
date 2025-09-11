@@ -12,7 +12,6 @@ import {
   MapPin
 } from 'lucide-react';
 import { useAdmin } from '../../contexts/AdminContext.tsx';
-import toast from 'react-hot-toast';
 
 const AdminSidebar: React.FC = () => {
   const { logout, adminSession } = useAdmin();
@@ -55,7 +54,6 @@ const AdminSidebar: React.FC = () => {
 
   const handleSignOut = async () => {
     await logout();
-    toast.success('Logged out successfully');
     navigate('/admin');
   };
 
